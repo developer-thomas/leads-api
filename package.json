@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc ",
     "dev": "tsx watch src/server.ts",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "sync-database": "npx prisma migrate dev --name sync_database"
   },
   "keywords": [],
   "author": "",
