@@ -29,6 +29,11 @@ router.get("/campaigns/:id", campaignsController.show);
 router.put("/campaigns/:id", campaignsController.update);
 router.delete("/campaigns/:id", campaignsController.delete);
 
+router.get("/campaign/:campaignId/leads");
+router.post("/campaign/:campaignId/leads");
+router.put("/campaign/:campaignId/leads/:leadId");
+router.delete("/campaign/:campaignId/leads/:leadId");
+
 router.get("/status", async (req, res, next) => {
   try {
     res.json({ message: "OK" });
