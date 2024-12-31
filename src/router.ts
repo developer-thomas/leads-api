@@ -1,12 +1,14 @@
 import { Router } from "express";
-import { LeadsController } from "./controllers/leads-controller";
-import { GroupsController } from "./controllers/groups-controller";
-import { CampaignsController } from "./controllers/campaigns-controller";
+import { LeadsController } from "./controllers/LeadsController";
+import { GroupsController } from "./controllers/GroupsController";
+import { CampaignsController } from "./controllers/CampaignsController";
+import { CampaignLeadsController } from "./controllers/CampaignLeadsController";
 const router = Router();
 
 const leadsController = new LeadsController();
 const groupsController = new GroupsController();
 const campaignsController = new CampaignsController();
+const campaingLeadsController = new CampaignLeadsController();
 
 // Rotas de Leads
 router.get("/leads", leadsController.index);
@@ -29,10 +31,11 @@ router.get("/campaigns/:id", campaignsController.show);
 router.put("/campaigns/:id", campaignsController.update);
 router.delete("/campaigns/:id", campaignsController.delete);
 
-router.get("/campaign/:campaignId/leads");
-router.post("/campaign/:campaignId/leads");
-router.put("/campaign/:campaignId/leads/:leadId");
-router.delete("/campaign/:campaignId/leads/:leadId");
+// Rotas de Campaign Leads
+router.get("/campaign/:campaignId/leads", campaingLeadsController.getLeads);
+router.post("/campaign/:campaignId/leads", campaingLeadsController.addLead);
+router.put("/campaign/:campaignId/leads/:leadId", campaingLeadsController.updateLeadStatus);
+router.delete("/campaign/:campaignId/leads/:leadId", campaingLeadsController.removeLead);
 
 router.get("/status", async (req, res, next) => {
   try {
