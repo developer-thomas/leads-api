@@ -3,12 +3,14 @@ import { LeadsController } from "./controllers/LeadsController";
 import { GroupsController } from "./controllers/GroupsController";
 import { CampaignsController } from "./controllers/CampaignsController";
 import { CampaignLeadsController } from "./controllers/CampaignLeadsController";
+import { GroupsLeadsController } from "./controllers/GroupsLeadsController";
 const router = Router();
 
 const leadsController = new LeadsController();
 const groupsController = new GroupsController();
 const campaignsController = new CampaignsController();
 const campaingLeadsController = new CampaignLeadsController();
+const groupsLeadsController = new GroupsLeadsController();
 
 // Rotas de Leads
 router.get("/leads", leadsController.index);
@@ -36,6 +38,13 @@ router.get("/campaign/:campaignId/leads", campaingLeadsController.getLeads);
 router.post("/campaign/:campaignId/leads", campaingLeadsController.addLead);
 router.put("/campaign/:campaignId/leads/:leadId", campaingLeadsController.updateLeadStatus);
 router.delete("/campaign/:campaignId/leads/:leadId", campaingLeadsController.removeLead);
+
+// Rotas de Leads Group
+router.get("/groups/:groupId/leads", groupsLeadsController.getLeadsFromGroup);
+// Adicionar lead a um grupo
+router.post("/groups/:groupId/leads", groupsLeadsController.addLeadToGroup);
+// Delete um lead de um grupo
+router.delete("/groups/:groupId/leads/:leadId", groupsLeadsController.deleteLeadFromGroup);
 
 router.get("/status", async (req, res, next) => {
   try {
